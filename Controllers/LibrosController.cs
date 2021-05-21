@@ -7,25 +7,58 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biblio.Data;
 using Biblio.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Biblio.Authorization;
 
 namespace Biblio.Controllers
 {
+    
     public class LibrosController : Controller
     {
         private readonly LibrosContext _context;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly    UserManager<IdentityUser> _userManager;
 
-        public LibrosController(LibrosContext context)
-        {
+        public LibrosController(LibrosContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+        {   
             _context = context;
+            _authorizationService=authorizationService;
+            _userManager=userManager;
         }
 
         // GET: Libros
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            return View(await _context.Libros.ToListAsync());
+            IQueryable<string> genreQuery = from m in _context.Libros
+                                    orderby m.Genero
+                                    select m.Genero;
+
+            var libros = from l in _context.Libros
+                 select l;
+                 if (!String.IsNullOrEmpty(searchString))
+             {
+             libros = libros.Where(s => s.Titulo.Contains(searchString));
+             }
+            if (!string.IsNullOrEmpty(movieGenre))
+             {
+             libros = libros.Where(x => x.Genero == movieGenre);
+             }
+             
+                var libros1 = new LibrosViewModel
+    {
+        Genero = new SelectList(await genreQuery.Distinct().ToListAsync()),
+        Libros = await libros.ToListAsync()
+    };
+
+    return View(libros1);
         }
 
         // GET: Libros/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,8 +77,15 @@ namespace Biblio.Controllers
         }
 
         // GET: Libros/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Create);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             return View();
         }
 
@@ -56,6 +96,13 @@ namespace Biblio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Titulo,Fecha,Autor,Genero,Cantidad")] Libros libros)
         {
+            var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Create);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             if (ModelState.IsValid)
             {
                 _context.Add(libros);
@@ -68,6 +115,13 @@ namespace Biblio.Controllers
         // GET: Libros/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Update);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +142,13 @@ namespace Biblio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Fecha,Autor,Genero,Cantidad")] Libros libros)
         {
+            var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Update);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             if (id != libros.Id)
             {
                 return NotFound();
@@ -119,6 +180,13 @@ namespace Biblio.Controllers
         // GET: Libros/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+           var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             if (id == null)
             {
                 return NotFound();
@@ -139,6 +207,13 @@ namespace Biblio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+           var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+        if (!isAuthorized.Succeeded)
+         {
+        return Forbid();
+           }
             var libros = await _context.Libros.FindAsync(id);
             _context.Libros.Remove(libros);
             await _context.SaveChangesAsync();

@@ -11,6 +11,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore; 
 using Biblio.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Biblio.Authorization;
 namespace Biblio
 {
     public class Startup
@@ -31,18 +34,33 @@ namespace Biblio
         services.AddDatabaseDeveloperPageExceptionFilter();
         services.AddDbContext<LibrosContext>(options =>
         {
-            var connectionString = Configuration.GetConnectionString("LibrosContext");
-
-            if (Environment.IsDevelopment())
-            {
-                options.UseSqlite(connectionString);
-            }
-            else
-            {
-                options.UseSqlServer(connectionString);
-            }
+                options.UseSqlite(Configuration.GetConnectionString("LibrosContext"));
         });
-        
+        services.AddDefaultIdentity<IdentityUser>(
+                options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<LibrosContext>();
+        /*services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));*/
+        services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+    
+            
+     // Authorization handlers.
+    
+
+   services.AddSingleton<IAuthorizationHandler,
+                          ContactAdministratorsAuthorizationHandler>();
+
+    services.AddSingleton<IAuthorizationHandler,
+                          ContactManagerAuthorizationHandler>();
+   services.AddSingleton<IAuthorizationHandler,
+                          ContactIsUserAuthorizationHandler>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,3 +94,7 @@ namespace Biblio
     }
 }
 }
+
+
+
+

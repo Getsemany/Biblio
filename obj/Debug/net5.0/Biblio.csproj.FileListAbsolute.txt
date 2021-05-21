@@ -155,14 +155,7 @@ C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\ref\Biblio.dll
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Biblio.pdb
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Biblio.genruntimeconfig.cache
 C:\Users\getsy\Desktop\Programacion web2\Biblio\bin\Debug\net5.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\bin\Debug\net5.0\Microsoft.Data.Sqlite.dll
 C:\Users\getsy\Desktop\Programacion web2\Biblio\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\getsy\Desktop\Programacion web2\Biblio\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Sqlite.dll
@@ -189,3 +182,10 @@ C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Lib
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Libros\Details.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Libros\Edit.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Libros\Index.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs

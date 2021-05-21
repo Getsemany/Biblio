@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8jhcJT5xN9D4xS/om2tx7wOYZj/kwJEttUoQkW3rkEKQszgS4JbCp/MBDhlWjO3I67oBdcwn54pd/ff1oGQcWw==",
+  "dgSpecHash": "T11xjwM+DDcz2GqpEn4i333X8JSv1uBkMO7aRYNZwAL4wTatnaYv/t+IvEww3IraYbHY12JBecD/0+rHZQAZnQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Biblio.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.6\\microsoft.entityframeworkcore.tools.5.0.6.nupkg.sha512",
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
+    "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\getsy\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",

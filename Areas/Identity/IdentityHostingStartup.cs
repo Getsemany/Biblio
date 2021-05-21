@@ -1,5 +1,5 @@
 using System;
-using Biblio.Areas.Identity.Data;
+using Biblio.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -14,14 +14,15 @@ namespace Biblio.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+           /* builder.ConfigureServices((context, services) => {
                 services.AddDbContext<BiblioIdentityDbContext>(options =>
-                    options.UseSqlServer(
+                    options.UseSqlite(
                         context.Configuration.GetConnectionString("BiblioIdentityDbContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<BiblioIdentityDbContext>();
-            });
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<LibrosContext>();
+            });*/
         }
     }
 }

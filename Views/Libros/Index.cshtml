@@ -1,4 +1,4 @@
-@model IEnumerable<Biblio.Models.Libros>
+@model Biblio.Models.LibrosViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,29 +9,38 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Libros" asp-action="Index" method="get">
+    <p>
+        <select asp-for="MovieGenre" asp-items="Model.Genero">
+            <option value="">Todos</option>
+        </select>
+        Titulo: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                @Html.DisplayNameFor(model => model.Libros[0].Titulo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fecha)
+                @Html.DisplayNameFor(model => model.Libros[0].Fecha)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Autor)
+                @Html.DisplayNameFor(model => model.Libros[0].Autor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genero)
+                @Html.DisplayNameFor(model => model.Libros[0].Genero)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
+                @Html.DisplayNameFor(model => model.Libros[0].Cantidad)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Libros) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Titulo)
@@ -49,9 +58,19 @@
                 @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @if ((await AuthorizationService.AuthorizeAsync(
+                     User, item,
+                     ContactOperations.Update)).Succeeded)
+                    {
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    }
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                @if ((await AuthorizationService.AuthorizeAsync(
+                     User, item,
+                     ContactOperations.Delete)).Succeeded)
+                    {
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
             </td>
         </tr>
 }

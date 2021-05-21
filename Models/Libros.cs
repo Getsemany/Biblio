@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Biblio.Models
 {
@@ -8,6 +9,7 @@ namespace Biblio.Models
         public int Id { get; set; }
         public string Titulo{get;set;}
 
+        [Display(Name = "Fecha de lanzamiento")]
         [DataType(DataType.Date)]
         public DateTime Fecha{get;set;}
 
