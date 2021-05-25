@@ -15619,8 +15619,18 @@
   "RootNamespace": "Biblio",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Portadas\\Create.cshtml",
+      "TargetPath": "Views\\Portadas\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Portadas\\Edit.cshtml",
+      "TargetPath": "Views\\Portadas\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15641,6 +15651,11 @@
     {
       "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Portadas\\Details.cshtml",
+      "TargetPath": "Views\\Portadas\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15679,8 +15694,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Portadas\\Delete.cshtml",
+      "TargetPath": "Views\\Portadas\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\getsy\\Desktop\\Programacion web2\\Biblio\\Views\\Portadas\\Index.cshtml",
+      "TargetPath": "Views\\Portadas\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

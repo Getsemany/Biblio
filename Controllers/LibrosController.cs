@@ -224,5 +224,24 @@ namespace Biblio.Controllers
         {
             return _context.Libros.Any(e => e.Id == id);
         }
+        public async Task<IActionResult> Prestar(int? id){
+        var libros = await _context.Libros.FindAsync(id);
+        if(libros.Cantidad>0){
+            libros.Cantidad--;
+        _context.Libros.Update(libros);
+        }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        
+        }
+        public async Task<IActionResult> Devolver(int? id){
+        var libros = await _context.Libros.FindAsync(id);
+        libros.Cantidad++;
+        _context.Libros.Update(libros);
+        
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        
+        }
     }
 }

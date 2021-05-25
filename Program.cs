@@ -18,7 +18,7 @@ namespace Biblio
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-/*
+
         using (var scope = host.Services.CreateScope())
         {
             var services = scope.ServiceProvider;
@@ -26,7 +26,7 @@ namespace Biblio
             try
             {
                 var context = services.GetRequiredService<LibrosContext>();
-                context.Database.Migrate();
+                //context.Database.Migrate();
 
                 // requires using Microsoft.Extensions.Configuration;
                 var config = host.Services.GetRequiredService<IConfiguration>();
@@ -35,7 +35,7 @@ namespace Biblio
 
                 var testUserPw = config["SeedUserPW"];
 
-                //SeedData.Initialize(services, testUserPw).Wait();
+                SeedData.Initialize(services, testUserPw).Wait();
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace Biblio
                 logger.LogError(ex, "An error occurred seeding the DB.");
             }
         }
-*/
+
         host.Run();
         }
 

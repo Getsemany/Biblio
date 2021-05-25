@@ -34,7 +34,15 @@ namespace Biblio
         services.AddDatabaseDeveloperPageExceptionFilter();
         services.AddDbContext<LibrosContext>(options =>
         {
-                options.UseSqlite(Configuration.GetConnectionString("LibrosContext"));
+            var connectionString = Configuration.GetConnectionString("Libros");
+                if (Environment.IsDevelopment())
+            {
+                options.UseSqlServer(connectionString);
+            }
+            else
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Libros"));
+            }
         });
         services.AddDefaultIdentity<IdentityUser>(
                 options => options.SignIn.RequireConfirmedAccount = true)
@@ -49,11 +57,7 @@ namespace Biblio
                     .RequireAuthenticatedUser()
                     .Build();
             });
-    
-            
      // Authorization handlers.
-    
-
    services.AddSingleton<IAuthorizationHandler,
                           ContactAdministratorsAuthorizationHandler>();
 

@@ -71,6 +71,18 @@
                     {
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
+                    @if ((await AuthorizationService.AuthorizeAsync(
+                     User, item,
+                     ContactOperations.Update)).Succeeded)
+                    {
+                <a asp-action="Prestar" asp-route-id="@item.Id">Prestar</a> 
+                    }
+                    @if ((await AuthorizationService.AuthorizeAsync(
+                     User, item,
+                     ContactOperations.Update)).Succeeded)
+                    {
+                <a asp-action="Devolver" asp-route-id="@item.Id">Devolver</a> 
+                    }
             </td>
         </tr>
 }

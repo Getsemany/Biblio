@@ -21,7 +21,7 @@ namespace Biblio.Authorization
             }
 
             // If not asking for approval/reject, return.
-            if (requirement.Name == Constants.ReadOperationName )
+            if (requirement.Name != Constants.DeleteOperationName )
             {
                 return Task.CompletedTask;
             }
