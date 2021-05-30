@@ -15,7 +15,8 @@ namespace Biblio.Data
 
         public DbSet<Libros> Libros { get; set; }
         public DbSet<Biblio.Models.Contact> Contact { get; set; }
-        public DbSet<Portada> Portadas{get;set;}
+        public DbSet<Archivo> Archivo{get;set;}
+        public DbSet<Prestamos> Prestamos{get;set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

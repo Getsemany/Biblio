@@ -1,0 +1,50 @@
+@model Biblio.Models.PrestamosViewModel
+
+@{
+    ViewData["Title"] = "Prestamo";
+}
+
+<h1>Create</h1>
+
+<h4>Libros</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Prestar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="prestamo.nombre" class="control-label"></label>
+                <input asp-for="prestamo.nombre" class="form-control" />
+                <span asp-validation-for="prestamo.nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="prestamo.nombreLibro" asp-items="Model.titulo">
+                
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="prestamo.fechaPrestamo" class="control-label"></label>
+                <input asp-for="prestamo.fechaPrestamo" class="form-control" />
+                <span asp-validation-for="prestamo.fechaPrestamo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prestamo.estado" class="control-label"></label>
+                <input asp-for="prestamo.estado" class="form-control" />
+                <span asp-validation-for="prestamo.estado" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Prestar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

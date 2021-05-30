@@ -26,7 +26,7 @@ namespace Biblio.Controllers
         {   
             _context = context;
             _authorizationService=authorizationService;
-            _userManager=userManager;
+             _userManager=userManager;
         }
 
         // GET: Libros
@@ -39,22 +39,22 @@ namespace Biblio.Controllers
 
             var libros = from l in _context.Libros
                  select l;
-                 if (!String.IsNullOrEmpty(searchString))
-             {
-             libros = libros.Where(s => s.Titulo.Contains(searchString));
-             }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                libros = libros.Where(s => s.Titulo.Contains(searchString));
+            }
             if (!string.IsNullOrEmpty(movieGenre))
-             {
-             libros = libros.Where(x => x.Genero == movieGenre);
-             }
+            {
+                libros = libros.Where(x => x.Genero == movieGenre);
+            }
              
-                var libros1 = new LibrosViewModel
-    {
-        Genero = new SelectList(await genreQuery.Distinct().ToListAsync()),
-        Libros = await libros.ToListAsync()
-    };
+            var libros1 = new LibrosViewModel
+            {
+                Genero = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Libros = await libros.ToListAsync()
+            };
 
-    return View(libros1);
+            return View(libros1);
         }
 
         // GET: Libros/Details/5
@@ -82,10 +82,10 @@ namespace Biblio.Controllers
             var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Create);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             return View();
         }
 
@@ -99,10 +99,10 @@ namespace Biblio.Controllers
             var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Create);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+            return Forbid();
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(libros);
@@ -118,10 +118,10 @@ namespace Biblio.Controllers
             var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Update);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             if (id == null)
             {
                 return NotFound();
@@ -145,10 +145,10 @@ namespace Biblio.Controllers
             var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Update);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             if (id != libros.Id)
             {
                 return NotFound();
@@ -183,10 +183,10 @@ namespace Biblio.Controllers
            var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Delete);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             if (id == null)
             {
                 return NotFound();
@@ -210,10 +210,10 @@ namespace Biblio.Controllers
            var isAuthorized = await _authorizationService.AuthorizeAsync(
                                                 User, _userManager.GetUserId(User),
                                                 ContactOperations.Delete);
-        if (!isAuthorized.Succeeded)
-         {
-        return Forbid();
-           }
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             var libros = await _context.Libros.FindAsync(id);
             _context.Libros.Remove(libros);
             await _context.SaveChangesAsync();
@@ -224,24 +224,88 @@ namespace Biblio.Controllers
         {
             return _context.Libros.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> Prestar(int? id){
-        var libros = await _context.Libros.FindAsync(id);
-        if(libros.Cantidad>0){
-            libros.Cantidad--;
-        _context.Libros.Update(libros);
+        public async Task<IActionResult> Prestar(){
+             var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+            IQueryable<string> libroQuery = from m in _context.Libros
+                                    orderby m.Titulo
+                                    select m.Titulo;
+
+            var titulos = new PrestamosViewModel
+            {
+                titulo = new SelectList(await libroQuery.Distinct().ToListAsync())
+            };
+            return View(titulos);
         }
+        [HttpPost]
+        public async Task<IActionResult> Prestar( PrestamosViewModel pr){
+             var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+            var libros = from l in _context.Libros
+                 select l;
+            libros = libros.Where(x => x.Titulo.Contains(pr.prestamo.nombreLibro));
+            if(libros==null)
+            {
+                return NotFound();
+            }
+            if(libros.First().Cantidad>0)
+            {
+                libros.First().Cantidad--;
+                _context.Libros.Update(libros.First());
+                pr.prestamo.estado=true;
+                _context.Prestamos.Add(pr.prestamo);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         
         }
-        public async Task<IActionResult> Devolver(int? id){
-        var libros = await _context.Libros.FindAsync(id);
-        libros.Cantidad++;
-        _context.Libros.Update(libros);
-        
+        public async Task<IActionResult> Devolver(){
+             var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+            var prestamos = from l in _context.Prestamos
+                 select l;
+            prestamos=prestamos.Where(x=> x.estado==true);
+            var pres=new PrestamosViewModel
+            {
+                Prestamos=await prestamos.ToListAsync()
+            };
+            return View(pres);
+        }
+
+        public async Task<IActionResult> Devolver2(int id){
+            var isAuthorized = await _authorizationService.AuthorizeAsync(
+                                                User, _userManager.GetUserId(User),
+                                                ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+            
+            var prestamo = await _context.Prestamos.FindAsync(id);
+            var libros = from l in _context.Libros
+                 select l;
+            libros = libros.Where(x => x.Titulo.Contains(prestamo.nombreLibro));
+            libros.First().Cantidad++;
+            prestamo.estado=false;
+            _context.Prestamos.Update(prestamo);
+            _context.Libros.Update(libros.First());
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        
         }
     }
 }

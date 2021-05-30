@@ -34,14 +34,14 @@ namespace Biblio
         services.AddDatabaseDeveloperPageExceptionFilter();
         services.AddDbContext<LibrosContext>(options =>
         {
-            var connectionString = Configuration.GetConnectionString("Libros");
+            var connectionString = Configuration.GetConnectionString("LibrosContext");
                 if (Environment.IsDevelopment())
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlite(connectionString);
             }
             else
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Libros"));
+                options.UseSqlite(Configuration.GetConnectionString("LibrosContext"));
             }
         });
         services.AddDefaultIdentity<IdentityUser>(

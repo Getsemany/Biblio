@@ -1,0 +1,36 @@
+@model Biblio.Models.BufferedSingleFileUploadDbModel
+@{
+    ViewData["Title"] = "Subir";
+}
+
+<h1>Create</h1>
+
+<h4>Libros</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" method="post" asp-for="Upload">
+        <div><label asp-for="FileUpload.Note" class="control-label"></label>
+                <input asp-for="FileUpload.Note" class="form-control" />
+                <span asp-validation-for="FileUpload.Note" class="text-danger"></span>
+        </div>
+    <div class="form-group">
+        <dt>
+            <label asp-for="FileUpload.FormFile"></label>
+        </dt>
+        <dd>
+            <input asp-for="FileUpload.FormFile" type="file">
+        </dd>
+    </div>
+    <input  class="btn btn-primary" type="submit" value="Upload">
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

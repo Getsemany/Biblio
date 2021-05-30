@@ -32,7 +32,7 @@ namespace ContactManager.Data
                 var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@contoso.com");
                 await EnsureRole(serviceProvider, managerID, Constants.ContactManagersRole);
 
-                SeedDB(context, adminID);
+                Seed(serviceProvider);
             }
         }
 
@@ -89,70 +89,110 @@ namespace ContactManager.Data
             return IR;
         }
         #endregion
-        #region snippet1
-        public static void SeedDB(LibrosContext context, string adminID)
+        public static void Seed(IServiceProvider serviceProvider)
         {
-            if (context.Contact.Any())
+            using (var context = new LibrosContext(
+                serviceProvider.GetRequiredService<
+                    DbContextOptions<LibrosContext>>()))
             {
-                return;   // DB has been seeded
-            }
+                // Look for any movies.
+                if (context.Libros.Any())
+                {
+                    return;   // DB has been seeded
+                }
 
-            context.Contact.AddRange(
-            #region snippet_Contact
-                new Contact
-                {
-                    Name = "Debra Garcia",
-                    Address = "1234 Main St",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "debra@example.com",
-                    OwnerID = adminID
-                },
-            #endregion
-            #endregion
-                new Contact
-                {
-                    Name = "Thorsten Weinrich",
-                    Address = "5678 1st Ave W",
-                    City = "Redmond",
-                    State = "WA",
-                    Zip = "10999",
-                    Email = "thorsten@example.com",
-                    OwnerID = adminID
-                },
-             new Contact
-             {
-                 Name = "Yuhong Li",
-                 Address = "9012 State st",
-                 City = "Redmond",
-                 State = "WA",
-                 Zip = "10999",
-                 Email = "yuhong@example.com",
-                 OwnerID = adminID
-             },
-             new Contact
-             {
-                 Name = "Jon Orton",
-                 Address = "3456 Maple St",
-                 City = "Redmond",
-                 State = "WA",
-                 Zip = "10999",
-                 Email = "jon@example.com",
-                 OwnerID = adminID
-             },
-             new Contact
-             {
-                 Name = "Diliana Alexieva-Bosseva",
-                 Address = "7890 2nd Ave E",
-                 City = "Redmond",
-                 State = "WA",
-                 Zip = "10999",
-                 Email = "diliana@example.com",
-                 OwnerID = adminID
-             }
-             );
-            context.SaveChanges();
+                context.Libros.AddRange(
+                    new Libros
+                    {
+                        Titulo = "LA LUZ EN LA OSCURIDAD",
+                        Autor="HEINO FALCKE",
+                        Fecha = DateTime.Parse("2020-10-04"),
+                        Genero = "Ciencia Ficcion",
+                        Cantidad = 15
+                    },
+                    new Libros {
+                        Titulo = "Harry Potter y la piedra filosofal",
+                        Autor = "J. K. Rowling",
+                        Fecha = DateTime.Parse("1997-06-26"),
+                        Genero = "Fantasia",
+                        Cantidad = 34
+                    },
+
+                    new Libros {
+                        Titulo = "El Hobbit",
+                        Autor = "J. R. R. Tolkien",
+                        Fecha = DateTime.Parse("1937-09-21"),
+                        Genero = "Fantasia",
+                        Cantidad = 20
+                    },
+
+                    new Libros {
+                        Titulo = "El diario de Ana Frank",
+                        Autor = "Ana Frank",
+                        Fecha = DateTime.Parse("1947-06-25"),
+                        Genero = "Autobiografia",
+                        Cantidad = 17
+                    },
+
+                    new Libros {
+                        Titulo = "La teoria del todo: El origen y el destino del universo",
+                        Autor = "Stephen Hawking",
+                        Fecha = DateTime.Parse("2010-09-30"),
+                        Genero = "Ciencia",
+                        Cantidad = 10
+                    },
+
+                    new Libros {
+                        Titulo = "Relatos de un asesino",
+                        Autor = "Donnefar Skedar",
+                        Fecha = DateTime.Parse("2020-12-14"),
+                        Genero = "Ficción",
+                        Cantidad = 5
+                    },
+
+                    new Libros {
+                        Titulo = "Un mundo muy loco",
+                        Autor = "Miguel Alberto Doménech",
+                        Fecha = DateTime.Parse("2021-05-14"),
+                        Genero = "Literaria",
+                        Cantidad = 4
+                    },
+
+                    new Libros {
+                        Titulo = "El arte de la guerra",
+                        Autor = "Sun Tzu",
+                        Fecha = DateTime.Parse("2016-12-09"),
+                        Genero = "Economia",
+                        Cantidad = 5
+                    },
+
+                    new Libros {
+                        Titulo = "El resplandor",
+                        Autor = "Stephen King",
+                        Fecha = DateTime.Parse("2012-05-10"),
+                        Genero = "Terror",
+                        Cantidad = 10
+                    },
+
+                    new Libros {
+                        Titulo = "1984",
+                        Autor = "George Orwell",
+                        Fecha = DateTime.Parse("2013-03-07"),
+                        Genero = "Ficción",
+                        Cantidad = 6
+                    },
+
+                    new Libros {
+                        Titulo = "It",
+                        Autor = "Stephen King",
+                        Fecha = DateTime.Parse("2012-11-15"),
+                        Genero = "Terror",
+                        Cantidad = 19
+                    }
+                );
+                context.SaveChanges();
+            }
         }
+        
     }
 }

@@ -189,8 +189,7 @@ C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Ide
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Portadas\Create.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Portadas\Delete.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Portadas\Details.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Portadas\Edit.cshtml.g.cs
-C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Portadas\Index.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Archivo\Index.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Archivo\Upload.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Libros\Prestar.cshtml.g.cs
+C:\Users\getsy\Desktop\Programacion web2\Biblio\obj\Debug\net5.0\Razor\Views\Libros\Devolver.cshtml.g.cs

@@ -4,10 +4,28 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Tabla de libros</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if ((await AuthorizationService.AuthorizeAsync(
+                     User,null,
+                     ContactOperations.Update)).Succeeded)
+                    {
+    <a asp-action="Create">Añadir un nuevo libro</a>
+                    }||
+        @if ((await AuthorizationService.AuthorizeAsync(
+                     User,null,
+                     ContactOperations.Update)).Succeeded)
+                    {
+                        
+                <a asp-action="Prestar" >Realizar prestamo</a> 
+                    }||
+                    @if ((await AuthorizationService.AuthorizeAsync(
+                     User, null,
+                     ContactOperations.Update)).Succeeded)
+                    {
+                <a asp-action="Devolver" >Realizar devolución</a> 
+                    }
 </p>
 <form asp-controller="Libros" asp-action="Index" method="get">
     <p>
@@ -62,27 +80,16 @@
                      User, item,
                      ContactOperations.Update)).Succeeded)
                     {
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar Libro</a> 
                     }
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                <a asp-action="Details" asp-route-id="@item.Id">Detalle del libro</a> 
                 @if ((await AuthorizationService.AuthorizeAsync(
                      User, item,
                      ContactOperations.Delete)).Succeeded)
                     {
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar Libro</a>
                     }
-                    @if ((await AuthorizationService.AuthorizeAsync(
-                     User, item,
-                     ContactOperations.Update)).Succeeded)
-                    {
-                <a asp-action="Prestar" asp-route-id="@item.Id">Prestar</a> 
-                    }
-                    @if ((await AuthorizationService.AuthorizeAsync(
-                     User, item,
-                     ContactOperations.Update)).Succeeded)
-                    {
-                <a asp-action="Devolver" asp-route-id="@item.Id">Devolver</a> 
-                    }
+                    
             </td>
         </tr>
 }
